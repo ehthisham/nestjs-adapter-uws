@@ -1,17 +1,18 @@
 {
-	"name": "nestjs-platform-fastify",
+	"name": "nestjs-platform-es4x",
 	"dependencies": {
-		"@vertx/core": "^4.3.2",
 		"@nestjs/common": "^8.0.0",
-		"@nestjs/core": "^8.0.0"
+		"@nestjs/core": "^8.0.0",
+		"@vertx/core": "^4.3.2",
+		"reflect-metadata": "^0.1.12",
+		"rxjs": "^7.5.6"
 	},
 	"devDependencies": {
-		"@swc/cli": "^0.1.57",
-		"@swc/core": "^1.2.215",
-		"dts-gen": "^0.6.0",
+		"@types/node": "^18.0.5",
 		"typescript": "^4.7.4"
 	},
 	"scripts": {
-		"build": "swc src --out-dir dist"
+		"build": "tsc",
+		"start": "es4x"
 	}
 }
