@@ -1,16 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "es4x",
-
   "compilerOptions": {
     "outDir": "dist",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "ES6",
+    "module": "Node16",
     "target": "es2018",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "declaration": true
-  },
-  "include": ["src"]
+    "experimentalDecorators": true
+  }
 }
