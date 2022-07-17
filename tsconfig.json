@@ -1,13 +1,15 @@
 {
-    "compilerOptions": {
-      "outDir": "dist",
-      "sourceMap": true,
-      "noImplicitAny": true,
-      "module": "Node16",
-      "target": "ES6",
-      "lib": [""],
-      "types": [],
-      "allowJs": true,
-      "declaration": true
-    }
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "es4x",
+
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "types": [],
+    "allowJs": true,
+    "esModuleInterop": true
   }
+}

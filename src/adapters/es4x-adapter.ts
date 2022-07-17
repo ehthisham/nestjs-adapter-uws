@@ -1,3 +1,5 @@
+
+
 import {
     HttpStatus,
     Logger,
@@ -8,65 +10,129 @@ import {
     VersioningOptions,
     VersioningType,
     VERSION_NEUTRAL,
-  } from '@nestjs/common';
+} from '@nestjs/common';
 import { CorsOptions, CorsOptionsDelegate } from '@nestjs/common/interfaces/external/cors-options.interface';
-  
-import { AbstractHttpAdapter } from '@nestjs/core/adapters/http-adapter';
 
-export class Es4xAdapter extends AbstractHttpAdapter {
-    close() {
-        throw new Error('Method not implemented.');
+import { AbstractHttpAdapter } from '@nestjs/core/adapters/http-adapter';
+import { HttpServer, HttpServerResponse, HttpServerRequest } from '@vertx/core';
+import { HttpMethod, HttpServerOptions } from '@vertx/core/options';
+import { isNil, isNumber, isObject } from '../utils';
+
+import { temporaryFile, temporaryFileTask } from 'tempy';
+import { createReadStream, createWriteStream } from 'fs';
+import path = require('path');
+
+
+export class Es4xAdapter extends AbstractHttpAdapter<HttpServer, HttpServerRequest, HttpServerResponse>  {
+
+    public async close() {
+        await this.httpServer.close();
     }
-    initHttpServer(options: NestApplicationOptions) {
-        throw new Error('Method not implemented.');
+
+
+    public listen(port: string | number, callback?: () => void): Promise<void>;
+    public listen(port: string | number, hostname: string, callback?: () => void): Promise<void>;
+    public async listen(port: any, ...args: any[]): Promise<void> {
+        await this.httpServer.listen(isNumber(port) ? port : parseInt(port));
     }
-    useStaticAssets(...args: any[]) {
-        throw new Error('Method not implemented.');
+    async initHttpServer(options: NestApplicationOptions) {
+        this.httpServer = await vertx.createHttpServer()
+            .listen();
+
+    }
+    useStaticAssets(aPath: string, options: {prefix?: string}) {
+        // TODO
     }
     setViewEngine(engine: string) {
         throw new Error('Method not implemented.');
     }
-    getRequestHostname(request: any) {
-        throw new Error('Method not implemented.');
+    getRequestHostname(request: HttpServerRequest): string {
+        return request.host();
     }
-    getRequestMethod(request: any) {
-        throw new Error('Method not implemented.');
+    getRequestMethod(request: HttpServerRequest): HttpMethod {
+        return request.method();
     }
-    getRequestUrl(request: any) {
-        throw new Error('Method not implemented.');
+    getRequestUrl(request: HttpServerRequest): string {
+        return request.uri();
     }
-    status(response: any, statusCode: number) {
-        throw new Error('Method not implemented.');
+    status(response: HttpServerResponse, statusCode: number) {
+        response.setStatusCode(statusCode);
     }
-    reply(response: any, body: any, statusCode?: number | undefined) {
-        throw new Error('Method not implemented.');
+    async reply(response: HttpServerResponse, body: any, statusCode?: number | undefined) {
+        if (statusCode) {
+            response.setStatusCode(statusCode);
+        }
+        if (isNil(body)) {
+            await response.send();
+        };
+
+        if (body instanceof StreamableFile) {
+            const headers = response.headers();
+            const streamHeaders = body.getHeaders();
+            if (
+                !headers.contains('Content-Type') &&
+                streamHeaders.type !== undefined
+            ) {
+                response.putHeader('Content-Type', streamHeaders.type);
+            }
+            if (
+                !headers.contains('Content-Disposition') &&
+                streamHeaders.disposition !== undefined
+            ) {
+                response.putHeader('Content-Disposition', streamHeaders.disposition);
+            }
+            if (
+                !headers.contains('Content-Length') &&
+                streamHeaders.length !== undefined
+            ) {
+                response.putHeader('Content-Length', streamHeaders.length);
+            }
+            temporaryFileTask((path: string) => {
+
+                const f = createWriteStream(path);
+                body.getStream().pipe(f);
+
+                response.sendFile(path);
+            });
+        }
+
+
+        return isObject(body) ? response.end(JSON.stringify(body)) : response.end(String(body));
     }
-    render(response: any, view: string, options: any) {
-        throw new Error('Method not implemented.');
+    render(response: HttpServerResponse, view: string, options: any) {
+        // TODO
     }
-    redirect(response: any, statusCode: number, url: string) {
-        throw new Error('Method not implemented.');
+    redirect(response: HttpServerResponse, statusCode: number, url: string) {
+        response.setStatusCode(301);
+        response.putHeader('Location', url)
     }
     setErrorHandler(handler: Function, prefix?: string | undefined) {
-        throw new Error('Method not implemented.');
+        this.httpServer.exceptionHandler(_ => handler());
     }
     setNotFoundHandler(handler: Function, prefix?: string | undefined) {
-        throw new Error('Method not implemented.');
+        this.httpServer.invalidRequestHandler(r => {
+            if (isNil(prefix) || r.path().startsWith(prefix!)) {
+                handler(r);
+            }
+        });
     }
-    setHeader(response: any, name: string, value: string) {
-        throw new Error('Method not implemented.');
+    setHeader(response: HttpServerResponse, name: string, value: string) {
+        response.putHeader(name, value);
     }
     registerParserMiddleware(prefix?: string | undefined, rawBody?: boolean | undefined) {
         throw new Error('Method not implemented.');
     }
     enableCors(options: CorsOptions | CorsOptionsDelegate<any>, prefix?: string | undefined) {
-        throw new Error('Method not implemented.');
+        // TODO
     }
-    createMiddlewareFactory(requestMethod: RequestMethod): ((path: string, callback: Function) => any) | Promise<(path: string, callback: Function) => any> {
-        throw new Error('Method not implemented.');
+    async createMiddlewareFactory(requestMethod: RequestMethod):  Promise<(path: string, callback: Function) => any> {
+         // TODO
+
+
+         return;
     }
     getType(): string {
-        throw new Error('Method not implemented.');
+        return 'es4x';
     }
 
 }
