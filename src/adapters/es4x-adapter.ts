@@ -18,9 +18,9 @@ import { HttpServer, HttpServerResponse, HttpServerRequest } from '@vertx/core';
 import { HttpMethod, HttpServerOptions } from '@vertx/core/options';
 import { isNil, isNumber, isObject } from '../utils';
 
-import { temporaryFile, temporaryFileTask } from 'tempy';
-import { createReadStream, createWriteStream } from 'fs';
-import path = require('path');
+import * as tmp from 'tmp';
+import { createReadStream, createWriteStream, PathLike } from 'fs';
+import { PathOrFileDescriptor } from 'fs';
 
 
 export class Es4xAdapter extends AbstractHttpAdapter<HttpServer, HttpServerRequest, HttpServerResponse>  {
@@ -87,7 +87,7 @@ export class Es4xAdapter extends AbstractHttpAdapter<HttpServer, HttpServerReque
             ) {
                 response.putHeader('Content-Length', streamHeaders.length);
             }
-            temporaryFileTask((path: string) => {
+            tmp.file({ prefix: 'es4x-nestjs', discardDescriptor:true}, (err: any, path: string) => {
 
                 const f = createWriteStream(path);
                 body.getStream().pipe(f);

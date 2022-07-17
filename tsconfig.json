@@ -6,10 +6,10 @@
     "outDir": "dist",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "ES6",
     "target": "es2018",
-    "types": [],
-    "allowJs": true,
-    "esModuleInterop": true
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "declaration": true
   }
 }

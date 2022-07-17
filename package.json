@@ -1,5 +1,8 @@
 {
 	"name": "nestjs-platform-es4x",
+	"type": "module",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"dependencies": {
 		"@nestjs/common": "^8.0.0",
 		"@nestjs/core": "^8.0.0",
@@ -10,9 +13,9 @@
 		"tmp": "^0.2.1"
 	},
 	"devDependencies": {
-		"@types/tmp": "0.2.3",
 		"@es4x/create": "latest",
 		"@types/node": "^18.0.5",
+		"@types/tmp": "0.2.3",
 		"eslint": "8.19.0",
 		"typescript": "^4.7.4"
 	},
