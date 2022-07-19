@@ -1,6 +1,10 @@
 import * as uws from 'uWebSockets.js';
 
 import {
+	getReasonPhrase
+} from 'http-status-codes';
+
+import {
     Logger,
     NestApplicationOptions,
     RequestMethod,
@@ -11,7 +15,6 @@ import { CorsOptions, CorsOptionsDelegate } from '@nestjs/common/interfaces/exte
 import { AbstractHttpAdapter } from '@nestjs/core/adapters/http-adapter';
 import { isNil, isObject, isUndefined } from '../utils';
 
-import * as tmp from 'tmp';
 import { createWriteStream } from 'fs';
 
 class ServerWrapper {
@@ -26,6 +29,10 @@ class ServerWrapper {
     once() {}
 }
 import { RequestHandler, VERSION_NEUTRAL } from '@nestjs/common/interfaces';
+
+function setStatus(res: uws.HttpResponse, code: number | string) {
+        res.writeStatus(`${code} ${getReasonPhrase(code)}`);
+}
 
 export class UwsAdapter extends AbstractHttpAdapter<ServerWrapper, uws.HttpRequest, uws.HttpResponse>  {
 
@@ -114,13 +121,13 @@ export class UwsAdapter extends AbstractHttpAdapter<ServerWrapper, uws.HttpReque
         return request.getUrl();
     }
     status(response: uws.HttpResponse, statusCode: number) {
-        response.writeStatus(statusCode.toString());
+        setStatus(response, statusCode);
     }
     reply(response: uws.HttpResponse, body: any, statusCode?: number | undefined) {
         
         console.log('reply', {response, body, statusCode})
         if (statusCode) {
-            response.writeStatus(statusCode.toString());
+            setStatus(response, statusCode.toString());
         }
         if (isNil(body)) {
             response.end();
@@ -156,7 +163,7 @@ export class UwsAdapter extends AbstractHttpAdapter<ServerWrapper, uws.HttpReque
       
     }
     redirect(response: uws.HttpResponse, statusCode: number, url: string) {
-        response.setStatusCode(301);
+        setStatus(response, 301);
         response.writeHeader('Location', url)
     }
     setErrorHandler(handler: Function, prefix?: string | undefined) {
@@ -171,7 +178,7 @@ export class UwsAdapter extends AbstractHttpAdapter<ServerWrapper, uws.HttpReque
     }
     enableCors(options: CorsOptions | CorsOptionsDelegate<any>, prefix?: string | undefined) {
         Logger.log('enableCors Method not implemented: '+JSON.stringify({prefix, options}));
-
+        
     }
     async createMiddlewareFactory(requestMethod: RequestMethod):  Promise<(path: string, callback: Function) => any> {
         Logger.log('createMiddlewareFactory Method not implemented: '+JSON.stringify({requestMethod}));

@@ -1,10 +1,10 @@
 
 import { NestFactory } from '@nestjs/core';
-import { Es4xAdapter } from 'nestjs-platform-es4x'
+import { UwsAdapter } from 'nestjs-platform-uws'
 import AppModule from './app.module';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule, new Es4xAdapter());
+    const app = await NestFactory.create(AppModule, new UwsAdapter());
     await app.listen(3000);
 }
 bootstrap();

@@ -1,1 +1,1 @@
-export * from './es4x-adapter';
+export * from './uws-adapter';

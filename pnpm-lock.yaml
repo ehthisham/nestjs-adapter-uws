@@ -1,41 +1,52 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@es4x/create': latest
-  '@nestjs/common': ^8.0.0
-  '@nestjs/core': ^8.0.0
-  '@types/node': ^18.0.5
-  '@types/tmp': 0.2.3
-  '@vertx/core': latest
-  '@vertx/web': latest
-  eslint: 8.19.0
-  reflect-metadata: ^0.1.12
-  rxjs: ^7.5.6
-  tmp: ^0.2.1
-  typescript: ^4.7.4
+importers:
 
-dependencies:
-  '@nestjs/common': 8.4.7_j5hagqx4mwzscud4kyjdvubauy
-  '@nestjs/core': 8.4.7_zyw32gfu5yv6lfoz64j5eiekme
-  '@vertx/core': 4.3.2
-  '@vertx/web': 4.3.2
-  reflect-metadata: 0.1.13
-  rxjs: 7.5.6
-  tmp: 0.2.1
+  .:
+    specifiers:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      '@types/node': ^18.0.5
+      http-status-codes: ^2.2.0
+      reflect-metadata: ^0.1.13
+      rxjs: ^7.5.6
+      typescript: ^4.7.4
+      uWebSockets.js: github:uNetworking/uWebSockets.js#v20.10.0
+    dependencies:
+      '@nestjs/common': 8.4.7_j5hagqx4mwzscud4kyjdvubauy
+      '@nestjs/core': 8.4.7_zyw32gfu5yv6lfoz64j5eiekme
+      http-status-codes: 2.2.0
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.6
+      uWebSockets.js: github.com/uNetworking/uWebSockets.js/806df48c9da86af7b3341f3e443388c7cd15c3de
+    devDependencies:
+      '@types/node': 18.0.5
+      typescript: 4.7.4
 
-devDependencies:
-  '@es4x/create': 0.19.0
-  '@types/node': 18.0.5
-  '@types/tmp': 0.2.3
-  eslint: 8.19.0
-  typescript: 4.7.4
+  example:
+    specifiers:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      '@types/node': ^18.0.5
+      '@types/tmp': 0.2.3
+      eslint: 8.19.0
+      nestjs-platform-uws: workspace
+      reflect-metadata: ^0.1.12
+      rxjs: ^7.5.6
+      typescript: ^4.7.4
+    dependencies:
+      '@nestjs/common': 8.4.7_j5hagqx4mwzscud4kyjdvubauy
+      '@nestjs/core': 8.4.7_zyw32gfu5yv6lfoz64j5eiekme
+      nestjs-platform-uws: link:..
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.6
+    devDependencies:
+      '@types/node': 18.0.5
+      '@types/tmp': 0.2.3
+      eslint: 8.19.0
+      typescript: 4.7.4
 
 packages:
-
-  /@es4x/create/0.19.0:
-    resolution: {integrity: sha512-30oC4R6h2IWeNO6MJLCknC0tCRD1fOPkFqGILwahh1v4TLRLAJ3imIvRutll2DK89TxQ1qDCfaUJE2mEjOm5SA==}
-    hasBin: true
-    dev: true
 
   /@eslint/eslintrc/1.3.0:
     resolution: {integrity: sha512-UWW0TMTmk2d7hLcWD1/e2g5HDM/HQ3csaLSqXCfqwh4uNDuNqlaKWXmEsL4Cs41Z0KnILNvwbHAah3C2yt06kw==}
@@ -147,37 +158,6 @@ packages:
     resolution: {integrity: sha512-dDZH/tXzwjutnuk4UacGgFRwV+JSLaXL1ikvidfJprkb7L9Nx1njcRHHmi3Dsvt7pgqqTEeucQuOrWHPFgzVHA==}
     dev: true
 
-  /@vertx/auth-common/4.3.2:
-    resolution: {integrity: sha512-xrifd6sRsBlbZgDq03sFUTgVxadt3IJH+tY382wKyLgZJFu2j85MtwUXn3IfViMisD4GtQWXNpd7pctTdZMeRA==}
-    dependencies:
-      '@vertx/core': 4.3.2
-    dev: false
-
-  /@vertx/bridge-common/4.3.2:
-    resolution: {integrity: sha512-xvWro+lUGSxXWmyAXBbolAtx+G7svSxqkTpleMMe5YCahnhlE6qxvFeTEwMJcH8nc7Xm55Ww+OfdP1swO2+P6Q==}
-    dependencies:
-      '@vertx/core': 4.3.2
-    dev: false
-
-  /@vertx/core/4.3.2:
-    resolution: {integrity: sha512-Y7Q5gl5JSXKZH0pivdVGnbCQvYJK1Ixspp9Vc7i5H36qq+0fOvSQ92I04rbiQDa6E9K9ISm/2/doUpx2eN+erw==}
-    dev: false
-
-  /@vertx/web-common/4.3.2:
-    resolution: {integrity: sha512-CuDzCk2tt3MLHx58v9BE8rG3grSBksB6ZQ1n2hKccMJxO+E0E6AlrSnh0GHuvHFuETV4D3DcKM9GNfqTbwB7+Q==}
-    dependencies:
-      '@vertx/core': 4.3.2
-    dev: false
-
-  /@vertx/web/4.3.2:
-    resolution: {integrity: sha512-P3qi+kqZwda5U7LxvVzPLdtfMvlq3+LGHK16HQQPckt1i/JWVTL1qtOSjvlQTORVmjOV3csAcKNaq70XdIdf6A==}
-    dependencies:
-      '@vertx/auth-common': 4.3.2
-      '@vertx/bridge-common': 4.3.2
-      '@vertx/core': 4.3.2
-      '@vertx/web-common': 4.3.2
-    dev: false
-
   /acorn-jsx/5.3.2_acorn@8.7.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -231,12 +211,14 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+    dev: true
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
+    dev: true
 
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -268,6 +250,7 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    dev: true
 
   /consola/2.15.3:
     resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
@@ -476,6 +459,7 @@ packages:
 
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    dev: true
 
   /functional-red-black-tree/1.0.1:
     resolution: {integrity: sha512-dsKNQNdj6xA3T+QlADDA7mOSlX0qiMINjn0cgr+eGHGsbSHzTabcIogz2+p/iqP1Xs6EP/sS2SbqH+brGTbq0g==}
@@ -497,6 +481,7 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: true
 
   /globals/13.16.0:
     resolution: {integrity: sha512-A1lrQfpNF+McdPOnnFqY3kSN0AFTy485bTi1bkLk4mVPODIUEcSfhHgRqA+QdXPksrSTTztYXx37NFV+GpGk3Q==}
@@ -508,6 +493,10 @@ packages:
   /has-flag/4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  /http-status-codes/2.2.0:
+    resolution: {integrity: sha512-feERVo9iWxvnejp3SEfm/+oNG517npqL2/PIA8ORjyOZjGC7TwCRQsZylciLS64i6pJ0wRYz3rkXLRwbtFa8Ng==}
+    dev: false
 
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
@@ -532,9 +521,11 @@ packages:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
+    dev: true
 
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+    dev: true
 
   /is-extglob/2.1.1:
     resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
@@ -600,6 +591,7 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
@@ -630,6 +622,7 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+    dev: true
 
   /optionator/0.9.1:
     resolution: {integrity: sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==}
@@ -653,6 +646,7 @@ packages:
   /path-is-absolute/1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /path-key/3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
@@ -692,6 +686,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
 
   /rxjs/7.5.6:
     resolution: {integrity: sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==}
@@ -732,13 +727,6 @@ packages:
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
-
-  /tmp/0.2.1:
-    resolution: {integrity: sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==}
-    engines: {node: '>=8.17.0'}
-    dependencies:
-      rimraf: 3.0.2
-    dev: false
 
   /tr46/0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -807,3 +795,10 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+    dev: true
+
+  github.com/uNetworking/uWebSockets.js/806df48c9da86af7b3341f3e443388c7cd15c3de:
+    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/806df48c9da86af7b3341f3e443388c7cd15c3de}
+    name: uWebSockets.js
+    version: 20.10.0
+    dev: false
